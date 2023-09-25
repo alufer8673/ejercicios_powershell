@@ -11,3 +11,20 @@ Escribir un programa que lea la puntuación del usuario e indique su nivel de re
 como la cantidad de dinero que recibirá el usuario.
 #>
 
+[double] $puntuacion = Read-Host "Introduzca la puntuación del empleado"
+$dinero = $puntuacion * 2400
+
+switch ($puntuacion){
+    {$_ -eq 0.0}{
+        Write-Host "Su nivel es inaceptable."
+        Write-Host "Recibirá una cantidad de $dinero€"
+    }
+    {$_ -eq 0.4}{
+        Write-Host "Su nivel es aceptable."
+        Write-Host "Recibirá una cantidad de $dinero€"
+    }
+    {$_ -ge 0.6}{
+        Write-Host "Su nivel es meritorio."
+        Write-Host "Recibirá una cantidad de $dinero€"
+    }
+}
