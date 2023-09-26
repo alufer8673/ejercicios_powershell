@@ -1,12 +1,12 @@
 ﻿<#
-Ejercicio 8 Escribir un programa que almacene la cadena de caracteres contraseña en una variable,
-pregunte al usuario por la contraseña hasta que introduzca la contraseña correcta.
+Ejercicio 8 Escribir un programa que pida al usuario un número entero y muestre por
+pantalla un triángulo rectángulo como el de más abajo.
+
+1
+3 1
+5 3 1
+7 5 3 1
+9 7 5 3 1
 #>
 
-[string] $password = "TortillaDePatata"
-
-while($password -cne $user_password){
-    [string] $user_password = Read-Host "Introduce la contraseña"
-}
-
-Write-Host "Has introducido la contraseña correcta."
+[int] $num = Read-Host "Introduce un número entero"
