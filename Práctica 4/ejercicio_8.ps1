@@ -10,3 +10,9 @@ pantalla un triángulo rectángulo como el de más abajo.
 #>
 
 [int] $num = Read-Host "Introduce un número entero"
+
+for ($i = 1; $i -le $num; $i++) {
+    for ($j = (2 * $i - 1); $j -ge 1; $j -= 2) {
+        Write-Host -NoNewline "$j "
+    }
+    Write-Host ""
