@@ -16,3 +16,4 @@ for ($i = 1; $i -le $num; $i++) {
         Write-Host -NoNewline "$j "
     }
     Write-Host ""
+}
