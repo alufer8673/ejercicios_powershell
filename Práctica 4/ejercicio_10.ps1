@@ -11,11 +11,10 @@ g) Mostar la fecha y hora actuales
 x) Salir
 
 El menú se mostrará hasta que el usuario seleccione la opción Salir. Todos los datos que necesite el
-usuario se pedirán por teclado al usuario. ayor o menor que el que hay que adivinar. Se termina
-cuando el usuario introduzca un 0 (Se rinde), o lo adivine (Enhorabuena).
+usuario se pedirán por teclado al usuario.
 #>
 
-while ($seleccion -ine "x" -or $seleccion -ne 0 ){
+do{
     Write-Host "`n*********************************************`n"
     Write-Host "a) Crear una carpeta"
     Write-Host "b) Crear un fichero nuevo"
@@ -27,5 +26,43 @@ while ($seleccion -ine "x" -or $seleccion -ne 0 ){
     Write-Host "x) Salir"
     Write-Host "`n*********************************************`n"
 
-    $seleccion = Read-Host "Selecciona una opción"    
-}
+    $seleccion = Read-Host "Selecciona una opción"
+
+    switch($seleccion){
+        
+        a {
+            $path = Read-Host "Ingresa la ruta del directorio"
+            New-Item $path -ItemType directory
+        }
+
+        b {
+            $path = Read-Host "Ingresa la ruta del fichero"
+            New-Item $path -ItemType file
+        }
+        c {
+            $path = Read-Host "Ingresa la ruta del directorio o archivo al que deseas cambiar el nombre"
+            $nombre = Read-Host "Ingresa el nombre del archivo o directorio"
+            Rename-Item $path $nombre
+        }
+        
+        d {
+            $path = Read-Host "Ingresa la ruta del directorio o archivo que deseas eliminar"
+            Remove-Item $path
+        }
+        
+        e {
+            $path = Read-Host "Ingresa la ruta del archivo o directorio que deseas verificar"
+            Test-Path $path
+        }
+
+        f {
+            $path = Read-Host "Ingresa la ruta del directorio que quieras ver la ruta"
+            Get-ChildItem $path 
+        }
+
+        g {
+            Get-Date
+        }
+    }
+    Read-Host "`nPresiona Enter para continuar"
+} while ($seleccion -ine "x")

@@ -10,6 +10,13 @@ un triángulo rectángulo como el de más abajo, de altura el número introducid
 
 [int] $num = Read-Host "Introduce un número entero"
 
-for($a = 1; $a -le $num; $a++){
-    Write-Host ("*" * $a)
+for ($fila = 1; $fila -le $num; $fila++){
+	for ($columna = 1; $columna -le $fila; $columna++){
+		Write-Host -NoNewLine "*"
+	}
+	Write-Host ""
 }
+
+#for($a = 1; $a -le $num; $a++){
+#    Write-Host ("*" * $a)
+#}
