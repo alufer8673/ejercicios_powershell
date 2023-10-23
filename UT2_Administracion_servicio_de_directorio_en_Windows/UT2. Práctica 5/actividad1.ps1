@@ -15,6 +15,34 @@ foreach ($dep in $departamentos){
 #compartir los departamentos
 foreach ($dep in $departamentos){
     New-SmbShare -Path C:\Empresa\"$($dep.departamento)" -Name "$($dep.departamento)" -ChangeAccess "$($dep.departamento)" -FullAccess Administradores -ReadAccess "Usuarios del dominio"
+#Grant-SmbShareAccess
 
-#    Grant-SmbShareAccess
+#Definir permisos NTFS con SET-ACL
+
+    $acl = Get-Acl -Path C:\Empresa\"$($dep.departamento)"
+
+    #deshabilitar la herencia y eliminar TODAS las reglas de acceso
+    $acl.SetAccessRuleProtection($true, $false)
+    
+    #añadir al grupo Administradores Control Total
+    $permisos = 'Administradores','FullControl','ContainerInherit,ObjectInherit','None','Allow'
+    $ace = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList $permisos
+    $acl.SetAccessRule($ace)
+
+    $ace | Format-Table
+
+    #añadir al grupo Usuarios del dominio Lectura
+    $permisos = 'Usuarios del dominio','Read','ContainerInherit,ObjectInherit','None','Allow'
+    $ace = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList $permisos
+    $acl.SetAccessRule($ace)
+
+    #añadir al grupo "$($dep.departamento)" Modificar
+    $permisos = $($dep.departamento),'Modify','ContainerInherit,ObjectInherit','None','Allow'
+    $ace = New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList $permisos
+    $acl.SetAccessRule($ace)
+
+    #establecer los permisos
+    $acl |Set-Acl -Path C:\Empresa\"$($dep.departamento)"
+
+    $ace | Format-Table
 }
