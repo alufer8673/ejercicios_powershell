@@ -9,7 +9,7 @@ foreach($emp in $empleados){
 }
 
 #compartir la carpeta Empresa_users
-New-SmbShare -Path C:\Empresa_users -Name Empresa_users$ -ReadAccess "Usuarios del dominio" -FullAccess Administradores
+New-SmbShare -Path C:\Empresa_users -Name Empresa_users$ -ChangeAccess "Usuarios del dominio" -FullAccess Administradores
 
 foreach($emp in $empleados){
 #Definir permisos NTFS con SET-ACL
